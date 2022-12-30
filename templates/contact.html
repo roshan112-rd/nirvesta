@@ -1,0 +1,87 @@
+{% load static %}
+{% include 'header.html' %}
+
+	
+	<!-- Map Section -->
+	<div class="map-section">
+		<div class="contact-map-area">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28260.771788393147!2d85.32459519471861!3d27.698864193093197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19f5323fb707%3A0x3bef7b9bf7d42df9!2sSukedhara%20bus%20stop%20%F0%9F%9A%8F!5e0!3m2!1sen!2snp!4v1672300114612!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>		</div>
+	</div>
+	<!-- End Map Section -->
+	
+	<!-- Contact Page Section -->
+	<div class="contact-page-section">
+		<div class="auto-container">
+			<!-- Contact Info Boxed -->
+			<div class="contact-info-boxed">
+				<div class="row clearfix">
+											<h2>Nirvesta Group</h2>
+
+					<!-- Column -->
+					<div class="column col-lg-6 col-md-6 col-sm-12">
+						<ul class="location-list">
+							<li><span>Location:</span>{{company.location}}</li>
+							<li><span>Contact:</span>{{company.contact}}</li>
+						</ul>
+					</div>
+					
+					<!-- Column -->
+					<div class="column col-lg-6 col-md-6 col-sm-12">
+						<ul class="location-list">
+							<li><span>Work Hours:</span>{{company.opening_hours}}</li>
+							<li><span>Email:</span>{{company.email}}</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+			
+			<!-- Form Boxed -->
+			<div class="form-boxed">
+				<div class="sec-title centered">
+					<div class="title">contact us</div>
+					<h2>We Always Here <span>To Help You</span></h2>
+				</div>
+				
+				<div class="boxed-inner">
+					<!-- Contact Form -->
+					<div class="contact-form">
+						<!-- Contact Form -->
+						<form method="post" action=" {% url 'contact' %} " id="contact-form">
+							{% csrf_token %}
+							<div class="row clearfix">
+								<div class="col-lg-4 col-md-6 col-sm-12 form-group">
+									<input type="text" name="name" placeholder="Name *" required>
+								</div>
+
+								<div class="col-lg-4 col-md-6 col-sm-12 form-group">
+									<input type="email" name="email" placeholder="Emaill Address *" required>
+								</div>
+
+								<div class="col-lg-4 col-md-12 col-sm-12 form-group">
+									<input type="text" name="subject" placeholder="Subject (Optional)" required>
+								</div>
+
+								<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+									<textarea name="message" placeholder="Message"></textarea>
+								</div>
+
+								<div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+									<button class="theme-btn btn-style-one" type="submit" name="submit-form"><span class="txt">Send Message</span></button>
+								</div>
+
+							</div>
+						</form>
+						<p class="form-messege"></p>
+
+					</div>
+					<!--End Contact Form -->
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	<!-- End Blog Detail Section -->
+	
+	{% include 'footer.html' %}

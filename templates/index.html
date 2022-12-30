@@ -1,0 +1,243 @@
+
+{% load static %}
+{% include 'header.html' %}
+	
+	<!-- Banner Section -->
+    <div class="banner-section">
+		<div class="main-slider-carousel owl-carousel owl-theme">
+            {% for slider in slider %}
+			<div class="slide" data-bg-image="{{slider.image.url}}">
+				<div class="auto-container w-100">
+					<div class="row clearfix">
+						
+						<!-- Content Column -->
+						<div class="content-column col-lg-7 col-md-12 col-sm-12">
+							<div class="inner-column">
+								<div class="title">{{slider.text_1}}</div>
+								<h1>{{slider.text_2}}</h1>
+								<div class="text">{{slider.text_3}}</div>
+								<div class="btn-box">
+									<a href="{{slider.custom_link}}" class="theme-btn btn-style-one"><span class="txt">{{slider.button_text}}</span></a>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+						
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		
+		
+	</div>
+	<!-- End Banner Section -->
+
+	<!-- CTA Section Start -->
+	<div class="cta-section" data-bg-image="{% static 'images/background/cta-bg.jpg'%}">
+		<div class="auto-container">
+			<div class="row align-items-center">
+				<div class="col-lg-7">
+					<!-- CTA Content Start -->
+					<div class="cta-content">
+						<h3 class="title">Book an appoitment quickly? <span class="text-bold">Call us now!</span></h3>
+						<p>We prodive a dedicated support 24/7 for any your question</p>
+					</div>
+					<!-- CTA Content End -->
+				</div>
+				<div class="col-lg-5">
+					<!-- CTA Phone Number Start -->
+					<div class="cta-phone text-lg-end text-strat">
+						<h2 class="title">{{company.contact}}</h2>
+					</div>
+					<!-- CTA Phone Number Start -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- CTA Section End -->
+	
+	<!-- About Section -->
+	<div class="about-section">
+		<div class="auto-container">
+			<div class="inner-container">
+				<div class="row align-items-center clearfix">
+					<!-- Image Column -->
+					<div class="image-column col-lg-6">
+						<div class="about-image">
+							<div class="about-inner-image">
+								<img src="{% static 'images/about/home-about.png'%}" alt="about">
+							</div>
+						</div>
+					</div>
+
+					<!-- Content Column -->
+					<div class="content-column col-lg-6 col-md-12 col-sm-12 mb-0">
+						<div class="about-column">
+							<div class="sec-title">
+						
+								<h2>{{company.about_us_page_heading_text}}</h2>
+							</div>
+							<div class="text">
+								<p>{{company.about_us_page_content|safe}}</p>
+							</div>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End About Section -->
+	
+	<!-- Services Section -->
+	<div class="services-section">
+		<div class="auto-container">
+			<div class="auto-container">
+		
+				<!-- Sec Title -->
+				<div class="sec-title">
+					<div class="clearfix">
+						<div class="pull-left">
+							<div class="title">Our Services</div>
+							<h2>Best Solution<span>For Your Business</span></h2>
+						</div>
+						<div class="pull-right">
+							<a href="{% url 'services' %}" class="cases">Browse All <span class="arrow ti-angle-right"></span></a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="inner-container">
+				<div class="row g-0">
+				{% for service in services %}
+					<!-- Service Block -->
+					<div class="service-block col-lg-3 col-md-6 col-sm-12">
+						<div class="inner-box">
+							<div class="icon-box">
+								<img src="{{service.icon.url}}" alt="" height=150 width=150>
+								{% comment %} <span class="icon ti-stats-up"></span> {% endcomment %}
+							</div>
+							<h5><a href="service-detail.html">{{service.title}}</a></h5>
+							<div class="text">{{service.description|truncatechars:100}}</div>
+							<a class="read-more" href="service-detail.html">More <span class="ti-angle-right"></span></a>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Services Section -->
+
+	<!-- Testimonial Section -->
+	<div class="testimonial-section">
+		<div class="auto-container">
+			<!-- Sec Title -->
+			<div class="sec-title">
+				<div class="title">testimonials</div>
+				<h2><span>{{company.no_of_clients}}Clients </span>Love Us</h2>
+			</div>
+			<div class="testimonial-carousel owl-carousel owl-theme">
+				{% for testimonial in testimonial %}
+				<!-- Testimonial Block -->
+				<div class="testimonial-block">
+					<div class="inner-box">
+						<div class="quote icofont-quote-right"></div>
+						<div class="author">{{testimonial.name}} <span>/ {{testimonial.company}} </span></div>
+						<div class="text">{{testimonial.testimonial}} </div>
+					</div>
+				</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Testimonial Section -->
+
+	<!-- Sponsors Section -->
+	<div class="sponsors-section">
+		<div class="auto-container">
+			
+			<div class="carousel-outer">
+                <!--Sponsors Slider-->
+                <ul class="sponsors-carousel owl-carousel owl-theme">
+					{% for partners in partners %}
+                    <li><div class="image-box"><a href="#"><img src="{{partners.logo.url}}" alt="{{partners.name}}"></a></div></li>
+					{% endfor %}
+                </ul>
+            </div>
+			
+		</div>
+	</div>
+	<!--End Sponsors Section-->
+	
+	<!-- Experts Section -->
+	<div class="experts-section">
+		<div class="auto-container">
+		
+			<!-- Sec Title -->
+			<div class="sec-title">
+				<div class="clearfix">
+					<div class="pull-left">
+						<div class="title">our team</div>
+						<h2>We Are <span>Friendly & Profressional</span></h2>
+					</div>
+					<div class="pull-right">
+						<a href="{% url 'team' %}" class="experts">all experts <span class="arrow ti-angle-right"></span></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row clearfix">
+				{% for team in team %}
+				<!-- Team Block -->
+				<div class="team-block col-lg-4 col-md-6 col-sm-6 col-12">
+					<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+						<div class="image">
+							<a href="#"><img src="{{team.image.url}}" alt="" /></a>
+							<!-- Social Box -->
+							<ul class="social-box">
+								{% if team.twitter %}
+								<li><a href="{{team.twitter}}" class="icofont-twitter"></a></li>
+								{% endif %}
+								{% if team.facebook %}
+								<li><a href="{{team.facebook}}" class="icofont-facebook"></a></li>
+								{% endif %}
+								{% if team.instagram %}
+								<li><a href="{{team.instagram}}" class="icofont-instagram"></a></li>
+								{% endif %}
+								{% if team.linkedin %}
+								<li><a href="{{team.linkedin}}" class="icofont-linkedin"></a></li>
+								{% endif %}
+							</ul>
+						</div>
+						<div class="lower-box mt-0">
+							<h4><a href="#">{{team.name}}</a></h4>
+							<div class="designation">{{team.position}}</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Experts Section -->
+	
+
+	
+	<!-- Map Section -->
+	<div class="map-section">
+		<div class="contact-map-area">
+			<iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.986005919501!2d-73.9685579655238!3d40.75862446708152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258e4a1c884e5%3A0x24fe1071086b36d5!2sThe%20Atrium!5e0!3m2!1sen!2sbd!4v1585132512970!5m2!1sen!2sbd" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+		</div>
+	</div>
+	<!-- End Map Section -->
+	
+	{% include 'footer.html' %}

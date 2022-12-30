@@ -1,0 +1,106 @@
+{% load static %}
+{% include 'header.html' %}
+
+	<!-- Experts Section -->
+	<div class="experts-section">
+		<div class="auto-container">
+		
+			<!-- Sec Title -->
+			<div class="sec-title">
+				<div class="clearfix">
+					<div class="pull-left">
+						<div class="title">our team</div>
+						<h2>Our<span>Board Members</span></h2>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row clearfix">
+				{% for team in board %}
+				<!-- Team Block -->
+				<div class="team-block col-lg-4 col-md-6 col-sm-6 col-12">
+					<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+						<div class="image">
+							<a href="#"><img src="{{team.image.url}}" alt="" /></a>
+							<!-- Social Box -->
+							<ul class="social-box">
+								{% if team.twitter %}
+								<li><a href="{{team.twitter}}" class="icofont-twitter"></a></li>
+								{% endif %}
+								{% if team.facebook %}
+								<li><a href="{{team.facebook}}" class="icofont-facebook"></a></li>
+								{% endif %}
+								{% if team.instagram %}
+								<li><a href="{{team.instagram}}" class="icofont-instagram"></a></li>
+								{% endif %}
+								{% if team.linkedin %}
+								<li><a href="{{team.linkedin}}" class="icofont-linkedin"></a></li>
+								{% endif %}
+							</ul>
+						</div>
+						<div class="lower-box mt-0">
+							<h4><a href="#">{{team.name}}</a></h4>
+							<div class="designation">{{team.position}}</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Experts Section -->
+
+
+
+		<!-- Experts Section -->
+		<div class="experts-section">
+			<div class="auto-container">
+			
+				<!-- Sec Title -->
+				<div class="sec-title">
+					<div class="clearfix">
+						<div class="pull-left">
+							<div class="title">our team</div>
+							<h2>Our<span>Management Team</span></h2>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row clearfix">
+					{% for team in team %}
+					<!-- Team Block -->
+					<div class="team-block col-lg-4 col-md-6 col-sm-6 col-12">
+						<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+							<div class="image">
+								<a href="#"><img src="{{team.image.url}}" alt="" /></a>
+								<!-- Social Box -->
+								<ul class="social-box">
+									{% if team.twitter %}
+									<li><a href="{{team.twitter}}" class="icofont-twitter"></a></li>
+									{% endif %}
+									{% if team.facebook %}
+									<li><a href="{{team.facebook}}" class="icofont-facebook"></a></li>
+									{% endif %}
+									{% if team.instagram %}
+									<li><a href="{{team.instagram}}" class="icofont-instagram"></a></li>
+									{% endif %}
+									{% if team.linkedin %}
+									<li><a href="{{team.linkedin}}" class="icofont-linkedin"></a></li>
+									{% endif %}
+								</ul>
+							</div>
+							<div class="lower-box mt-0">
+								<h4><a href="#">{{team.name}}</a></h4>
+								<div class="designation">{{team.position}}</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+			</div>
+		</div>
+		<!-- End Experts Section -->
+
+{% include 'footer.html' %}

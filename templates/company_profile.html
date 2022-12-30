@@ -1,0 +1,72 @@
+{% load static %}
+{% include 'header.html' %}
+	
+
+	
+
+
+
+
+
+
+
+
+<div class="container" style="margin-top:50px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" justify-content-between>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Profile</a>
+            <a class="nav-item nav-link active" href="{% url 'company_profile' %}">Company Profile</a>
+            <a class="nav-item nav-link active" href="{% url 'apply_loan' %}">Apply Loan</a>
+            
+            
+          </div>
+          
+        </div>
+        <div>
+           <a href=" {% url 'logout' %} "> <button class="btn btn-primary">Logout</button></a>
+          </div>
+      </nav>
+	<!-- Services Section -->
+	<div class="services-section section-padding">
+		<div class="auto-container">
+            <div class="text">
+                <p>{{company.company_profile_text}}</p>
+            </div>
+			<div class="sec-title">
+				<h2><span>Invested </span>Companies</h2>
+			</div>
+			<div class="inner-container">
+				<div class="row g-0">
+				{% for company_data in company_data %}
+					<!-- Service Block -->
+					<div class="service-block col-lg-3 col-md-6 col-sm-12">
+						<div class="inner-box">
+							<div class="icon-box">
+                                <img src="{{company_data.company_logo.url}}" alt="">
+								{% comment %} <span class="icon ti-blackboard"></span> {% endcomment %}
+							</div>
+							<h5><a href="service-detail.html">{{company_data.company_name}}</a></h5>
+							<div class="text">Investment Duration: {{company_data.investment_duration}}</div>
+							<div class="text">Invested Amount: {{company_data.invested_amount}}</div>
+							<div class="text"> Date: {{company_data.investment_date}}</div>
+						</div>
+					</div>
+				{% endfor %}
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Services Section -->	
+
+    
+</div>
+
+
+
+
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,85 @@
+{% load static %}
+{% include 'header.html' %}
+	
+	<!--Sidebar Page Container-->
+    <div class="sidebar-page-container">
+    	<div class="auto-container">
+			<!-- Service Title Box -->
+			<div class="service-title-box">
+				<h2>{{service_data.title}}</h2>
+			</div>
+        	<div class="row clearfix">
+            	
+                <!-- Content Side -->
+                <div class="content-side col-lg-9 col-md-12 col-sm-12">
+					<div class="service-detail">
+						<div class="inner-box">
+							<div class="image">
+								{% if service_data.featured_image %}
+								<img src=" {{service_data.featured_image.url}}" alt="" />
+								{% else %}
+								<img src=" {% static 'images/resource/service-1.jpg' %}" alt="" />
+								{% endif %}
+							</div>
+							<div class="lower-content">
+								<p>{{service_data.description|safe}}</p>
+								<div class="accordian-box">
+									<h4>Frequently Asked Question</h4>
+									
+									<!--Accordian Box-->
+									<ul class="accordion-box">
+										<!--Block-->
+										{% for faqs in faqs %}
+										<li class="accordion block">
+											<div class="acc-btn"><div class="icon-outer"><span class="icon icofont-plus"></span> <span class="icon icofont-minus"></span></div>{{faqs.question}}</div>
+											<div class="acc-content">
+												<div class="content">
+													<div class="accordian-text">{{faqs.answer}}</div>
+												</div>
+											</div>
+										</li>
+										{% endfor %}
+									</ul>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--Sidebar Side-->
+                <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
+                	<aside class="sidebar sticky-top">
+						<!-- brochure Widget -->
+                        <div class="sidebar-widget brochures-widget">
+							<div class="widget-content">
+								<h4>Our brochures</h4>
+								<div class="text">Download our comapny profile & financial brochure.</div>
+								<ul class="brochure-list">
+									{% for files in files %}
+									<li><a href="{{files.file.url}}"><span class="icon far fa-file-pdf"></span>{{files.name}}</a></li>
+									{% endfor %}
+									
+								</ul>
+							</div>
+						</div>
+						
+						<!-- Enquiry Widget -->
+                        <div class="sidebar-widget enquiry-widget">
+							<div class="widget-content">
+								<h4>For Business Enquiry</h4>
+								<div class="text">You can also send us an email and we’ll get in touch shortly, or Troll Free</div>
+								<div class="number">Number :<a href="tel:+91-00-700-6202">{{company.contact}}</a></div>
+								<a href="{% url 'contact' %}" class="theme-btn btn-style-two"><span class="txt">Send Email</span></a>
+							</div>
+						</div>
+						
+					</aside>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	{% include 'footer.html' %}

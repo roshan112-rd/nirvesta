@@ -1,0 +1,136 @@
+{% load static %}
+<!-- Main Footer -->
+<footer class="main-footer">
+    <div class="auto-container">
+        <!--Widgets Section-->
+        <div class="widgets-section">
+            <div class="row clearfix">
+                
+                <!-- Column -->
+                <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+                    <div class="row clearfix">
+                    
+                        <!-- Footer Column -->
+                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                            <div class="footer-widget logo-widget">
+                                <div class="logo">
+                                    <a href="index.html"><img src="images/logo.png" alt="" /></a>
+                                </div>
+                                <div class="call">
+                                    Call us directly
+                                    <a class="phone" href="tel:{{company.contact}}">{{company.contact}}</a>
+                                    <a class="email" href="mailto:{{company.email}}">{{company.email}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+                
+                <!-- Column -->
+                <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+                    <div class="row clearfix">
+                        
+                        <!-- Footer Column -->
+                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                            <div class="footer-widget links-widget">
+                                <h5>Quick Links</h5>
+                                <ul class="list-link">
+                                    <li><a href="">FAQS</a></li>
+                                    <li><a href="">Support</a></li>
+                                    <li><a href="">Sitemap</a></li>
+                                    <li><a href="">Community</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Footer Column -->
+                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                            <div class="footer-widget newsletter-widget">
+                                <h5>Our Newsletter</h5>
+                                <div class="text">Subscribe to our newsletter and we will inform you about latest updates and offers</div>
+                                <!-- Newsletter Form -->
+                                <div class="newsletter-form">
+                                    <form method="post" action="contact.html">
+                                        <div class="form-group">
+                                            <input type="email" name="email" value="" placeholder="Email Address..." required>
+                                            <button type="submit" class="theme-btn icofont-arrow-right"></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="auto-container">
+                <div class="bottom-inner">
+                    <div class="row clearfix">
+                        
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="copyright">Copyright ©<script async="" src="https://spellinnovation.com"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://spellinnovation.com" target="_blank">Spell Innovation</a></div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ul class="social-nav">
+                                <li><a href="{{company.twitter_url}}" class="icofont-twitter"></a></li>
+                                <li><a href="{{company.facebook_url}}" class="icofont-facebook"></a></li>
+                                <li><a href="{{company.instagram_url}}" class="icofont-instagram"></a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>	
+        </div>
+        
+    </div>
+</footer>
+
+</div>
+<!--End pagewrapper-->
+
+<!-- Search Popup -->
+<div class="search-popup">
+<button class="close-search style-two"><span class="icofont-brand-nexus"></span></button>
+<button class="close-search"><span class="icofont-arrow-up"></span></button>
+<form method="post" action="blog.html">
+    <div class="form-group">
+        <input type="search" name="search-field" value="" placeholder="Search Here" required="">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form>
+</div>
+<!-- End Header Search -->
+
+<!-- Scroll To Top -->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-up"></span></div>
+
+<script src="{% static 'js/vendor/modernizr-3.6.0.min.js'%}"></script>
+<script src="{% static 'js/vendor/jquery-3.6.0.min.js'%}"></script>
+<script src="{% static 'js/vendor/jquery-migrate-3.3.2.min.js'%}"></script>
+
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+<script src="{% static 'js/jquery.fancybox.js'%}"></script>
+<script src="{% static 'js/appear.js'%}"></script>
+<script src="{% static 'js/owl.js'%}"></script>
+<script src="{% static 'js/wow.js'%}"></script>
+<script src="{% static 'js/parallax.min.js'%}"></script>
+<script src="{% static 'js/tilt.jquery.min.js'%}"></script>
+<script src="{% static 'js/jquery.paroller.min.js'%}"></script>
+<script src="{% static 'js/jquery-ui.js'%}"></script>
+<script src="{% static 'js/script.js'%}"></script>
+
+</body>
+</html>

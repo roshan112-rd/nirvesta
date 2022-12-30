@@ -1,0 +1,62 @@
+{% load static %}
+{% include 'header.html' %}
+	
+	<!-- Page Title Section -->
+    <div class="page-title-section style-two">
+    	<div class="auto-container">
+			<ul class="post-meta">
+				<li><a href="index.html">Index</a></li>
+				<li>Blog</li>
+			</ul>
+			<h2>Problems About Social Insurance For <br> Truck Drivers</h2>
+		</div>
+	</div>
+	<!-- End Page Title Section -->
+	
+	<!--Sidebar Page Container-->
+    <div class="sidebar-page-container padding-top style-two">
+    	<div class="auto-container">
+			<div class="row clearfix">
+            	
+                <!-- Content Side -->
+                <div class="content-side col-lg-9 col-md-12 col-sm-12">
+					<div class="blog-detail">
+						<div class="inner-box">
+							<div class="image">
+								<img src="{{blog_data.image.url}}" alt="" />
+							</div>
+							<div class="lower-content">
+								<div class="post-info"> {{blog_data.created}} by <i>Admin</i></div>
+								<p>{{blog_data.blog|safe}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--Sidebar Side-->
+                <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
+                	<aside class="sidebar sticky-top margin-left">
+
+						<!-- Popular Posts -->
+                        <div class="sidebar-widget popular-posts">
+							<div class="sidebar-title">
+                            	<h4>Recent Posts</h4>
+                            </div>
+                            <div class="widget-content">
+								{% for blogs in blogs %}
+                                <div class="post">
+                                    <figure class="post-thumb"><a href="{% url 'blog_detail' id=blogs.id %}"><img src="{{blogs.image.url}}" alt=""></a></figure>
+                                    <div class="text"><a href="{% url 'blog_detail' id=blogs.id %}">{{blogs.title}}</a></div>
+                                </div>
+                                {% endfor %}
+                            </div>
+						</div>
+					</aside>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	
+	{% include 'footer.html' %}

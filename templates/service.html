@@ -1,0 +1,90 @@
+{% load static %}
+{% include 'header.html' %}
+	
+	<!-- Service Banner Section -->
+    <div class="service-banner-section" data-bg-image="{% static 'images/background/service-bg.jpg' %}">
+		<div class="auto-container">
+			<div class="content-box">
+				<h2>Our <span>Services</span></h2>
+				<div class="text">Capitalise on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional base clickthroughs.</div>
+				<a href="contact.html" class="theme-btn btn-style-one"><span class="txt">get in touch</span></a>
+				
+				<!-- Lower Box -->
+				<div class="lower-box clearfix">
+					<div class="pull-left">
+						<div class="book">
+							<span class="icon icofont-phone"></span>
+							book through <br> call now
+						</div>
+					</div>
+					<div class="pull-right">
+						<a class="phone" href="tel:+53-8698-50-50">{{company.contact}}</a>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	<!-- End Service Banner Section -->
+	
+	<!-- Services Section -->
+	<div class="services-section section-padding">
+		<div class="auto-container">
+			<div class="sec-title">
+				<div class="title">our services</div>
+				<h2><span>Best Solutions</span> For Your Business</h2>
+			</div>
+			<div class="inner-container">
+				<div class="row g-0">
+				{% for services in services %}
+					<!-- Service Block -->
+					<div class="service-block col-lg-3 col-md-6 col-sm-12">
+						<div class="inner-box">
+							<div class="icon-box">
+								<span class="icon ti-blackboard"></span>
+							</div>
+							<h5><a href="service-detail.html">{{services.name}}y</a></h5>
+							<div class="text">{{services.description|truncatechars:80}}</div>
+							<a class="read-more" href=" {% url 'service_detail' id=services.id %} ">Read More <span class="ti-angle-right"></span></a>
+						</div>
+					</div>
+				{% endfor %}
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Services Section -->	
+	
+	<!-- Testimonial Section -->
+	<div class="testimonial-section">
+		<div class="auto-container">
+			<div class="inner-container">
+			
+				<!-- Sec Title -->
+				<div class="sec-title">
+					<div class="title">testimonials</div>
+					<h2><span>+2,500 Clients </span>Love Us</h2>
+				</div>
+				<div class="testimonial-carousel owl-carousel owl-theme">
+					{% for testimonial in testimonial %}
+					<!-- Testimonial Block -->
+					<div class="testimonial-block">
+						<div class="inner-box">
+							<div class="quote icofont-quote-right"></div>
+							<div class="author">{{testimonial.name}} <span>/ {{testimonial.company}}</span></div>
+							<div class="text">{{testimonial.testimonial}}</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- End Testimonial Section -->
+	
+	
+	{% include 'footer.html' %}
