@@ -1,0 +1,47 @@
+{% load static %}
+{% include 'header.html' %}
+
+
+
+
+		<!-- Experts Section -->
+		<div class="experts-section">
+			<div class="auto-container">
+			
+				<!-- Sec Title -->
+				<div class="sec-title">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h2>Our<span> Shareholders</span></h2>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row clearfix">
+					{% for team in team %}
+					<!-- Team Block -->
+					<div class="team-block col-lg-4 col-md-6 col-sm-6 col-12">
+						<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+							{% if team.photo %}
+							<div class="image">
+								<a href="#"><img src="{{team.photo.url}}" alt="" /></a>
+							</div>
+							{% else %}
+							<div class="image">
+								<a href="#"><img src="{{team.photo.url}}" alt="" /></a>
+							</div>
+							{% endif %}
+							<div class="lower-box mt-0">
+								<h4><a href="#">{{team.user.first_name}}</a></h4>
+								<div class="designation">{{team.position}}</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+			</div>
+		</div>
+		<!-- End Experts Section -->
+
+{% include 'footer.html' %}

@@ -267,7 +267,7 @@ def apply_loan(request):
         if form.is_valid():
             form.save()
 
-            return redirect('home')
+            return redirect('dashboard')
 
 
 
@@ -297,3 +297,17 @@ def company_profile(request):
             'company_data':company_data
         }
     return render(request, 'company_profile.html',context)
+
+def shareholders(request):
+    team = Shareholder.objects.all()
+    if CompanySetup.objects.filter()[:1].exists():
+        company = CompanySetup.objects.filter()[:1].get()
+        context = {
+            'company':company,
+            'team':team,
+        }
+    else:
+        context = {
+            'team':team,
+        }
+    return render(request,'shareholders.html',context)

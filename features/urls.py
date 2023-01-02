@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('about/', views.about, name="about"),
     path('team/', views.team, name="team"),
+    
     path('services/', views.services, name="services"),
     path('login/', views.login, name="login"),
     path('blogs/', views.blogs, name="blogs"),
@@ -18,7 +19,7 @@ urlpatterns = [
     path('logout/', views.logout, name="logout"),
     path('apply_loan/', views.apply_loan, name="apply_loan"),
     path('company_profile/', views.company_profile, name="company_profile"),
-    
+    path('shareholders/', views.shareholders, name="shareholders"),
     path('service_detail/<int:id>', views.service_detail, name="service_detail"),
     path('blog_detail/<int:id>', views.blog_detail, name="blog_detail"),
     
