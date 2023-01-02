@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
-
+from .forms import *
 # Create your views here.
 def home(request):
     slider = Slider.objects.all().order_by("order")
@@ -261,13 +261,25 @@ def logout(request):
 
 @login_required
 def apply_loan(request):
+    form = LoanForm()
+    if request.method == 'POST':
+        form = LoanForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('home')
+
+
+
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
         context = {
             'company':company,
+            'form':form
         }
     else:
         context = {
+            'form':form
         }
     return render(request, 'apply_loan.html',context)
 

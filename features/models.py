@@ -169,6 +169,23 @@ class Contact(models.Model):
         verbose_name_plural = "13. Borrowers"
 
 
+
+
+class CompanyProfile(models.Model):
+    company_name = models.TextField()
+    invested_amount = models.IntegerField()
+    investment_date = models.DateField()
+    investment_duration = models.IntegerField()
+    company_logo = models.ImageField(upload_to='company_profile')
+
+
+    def __str__(self):
+        return self.company_name
+    class Meta:
+        verbose_name_plural = "14. Company Profile"
+
+
+
 class Loan(models.Model):
     desired_loan_amount = models.IntegerField()
     annual_income = models.IntegerField()
@@ -177,10 +194,10 @@ class Loan(models.Model):
     name = models.TextField()
     date_of_birth = models.TextField()
     marital_status = models.TextField()
-    email = models.TextField()
+    email = models.EmailField()
     phone = models.TextField()
     address = models.TextField()
-    how_long = models.TextField()
+    how_long_have_you_lived_in_your_given_address = models.TextField()
    
     present_employer_name = models.TextField()
     occupation = models.TextField()
@@ -199,16 +216,3 @@ class Loan(models.Model):
         return self.name
     class Meta:
         verbose_name_plural = "14. Loan Forms"
-
-class CompanyProfile(models.Model):
-    company_name = models.TextField()
-    invested_amount = models.IntegerField()
-    investment_date = models.DateField()
-    investment_duration = models.IntegerField()
-    company_logo = models.ImageField(upload_to='company_profile')
-
-
-    def __str__(self):
-        return self.company_name
-    class Meta:
-        verbose_name_plural = "14. Company Profile"

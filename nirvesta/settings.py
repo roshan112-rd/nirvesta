@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'features',
+    
 ]
 INSTALLED_APPS += ('django_summernote',)
 MIDDLEWARE = [
