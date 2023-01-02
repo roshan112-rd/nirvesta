@@ -21,7 +21,8 @@
         {% load crispy_forms_tags %}
         <form action="{% url 'apply_loan' %}" method = 'POST'>
           {% csrf_token %}
-          {{ form|crispy }}
+          {% comment %} {{ form|crispy }} {% endcomment %}
+          {% crispy form %}
 
           <div>
             <button class="btn btn-primary mt-5" type="submit">Submit</button>
@@ -51,8 +52,11 @@
   border-radius: 10px;
   border: 1px solid rgb(204, 204, 204);
 }
-label{
+fieldset{
   margin-top:20px;
+}
+fieldset legend{
+  color:black;
 }
 .help-block strong{
   color:red;

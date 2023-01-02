@@ -1,14 +1,16 @@
 from django.forms import ModelForm
-from crispy_forms.helper import FormHelper, Layout
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit
 from .models import Loan
 from django import forms
+from django.http import HttpResponse
 class LoanForm(forms.ModelForm):
 	error_css_class='error-field'
 	required_css_class='required-field'
 
 	STATUS_CHOICES = (
+		('unmarried', 'unmarried'),
         ('married', 'married'),
-        ('unmarried', 'unmarried')
     )
 	
 	desired_loan_amount = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-input','placeholder': '100000'}))
@@ -35,10 +37,64 @@ class LoanForm(forms.ModelForm):
 	saving_account_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '1258455165145524'}))
 	address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'New- Baneshwor'}))
 	phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '01-1254541'}))
+
+
 	class Meta:
 		model = Loan
 		fields = '__all__'
+
+
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.helper = FormHelper(self)
+		self.helper = FormHelper()
+		self.helper.layout = Layout(
+			Fieldset(
+				'',
+				'annual_income',
+				'desired_loan_amount',
+				'use_of_loan',
+				
+			),		
+			Fieldset(
+				'contact information',
+				'name',
+				'date_of_birth',
+				'marital_status',
+				'email',
+				'phone',
+				'address',
+				'how_long_have_you_lived_in_your_given_address',
+				'present_employer_name',
+				'occupation',
+
+				'years_of_experience',
+				'gross_monthly_income',
+				'monthly_rent',
+				'down_payment',
+				'comments',
+				'institution_name',
+				'saving_account_number',
+				'address',
+				'phone_number',
+			),
+			Fieldset(
+				'EMPLOYMENT INFORMATION',
+				'present_employer_name',
+				'occupation',
+
+				'years_of_experience',
+				'gross_monthly_income',
+				'monthly_rent',
+				'down_payment',
+				'comments',
+				
+			),
+			Fieldset(
+				'Bank References',
+				'institution_name',
+				'saving_account_number',
+				'address',
+				'phone_number',				
+			)
+		)
 	
