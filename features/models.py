@@ -187,6 +187,7 @@ class CompanyProfile(models.Model):
 
 
 class Loan(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     desired_loan_amount = models.IntegerField()
     annual_income = models.IntegerField()
     use_of_loan = models.TextField()
@@ -209,10 +210,33 @@ class Loan(models.Model):
 
     institution_name = models.TextField()
     saving_account_number = models.TextField()
-    address = models.TextField()
+    institution_address = models.TextField()
     phone_number = models.TextField()
+    created = models.DateField(auto_now_add = True)
 
     def __str__(self):
         return self.name
     class Meta:
         verbose_name_plural = "14. Loan Forms"
+
+
+class Chat(models.Model):
+    sender  = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_responded = models.BooleanField(default = 0)
+    message= models.TextField()
+
+    def __str__(self):
+        return self.message
+
+    class Meta:
+        verbose_name_plural = "00. Chat"
+
+class Reply (models.Model):
+    sender  = models.ForeignKey(User, on_delete=models.CASCADE)
+    message= models.TextField()
+
+    def __str__(self):
+        return self.message
+
+    class Meta:
+        verbose_name_plural = "0001. Reply"

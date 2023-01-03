@@ -261,27 +261,34 @@ def logout(request):
 
 @login_required
 def apply_loan(request):
+    loan_data = Loan.objects.filter(user=request.user)
     form = LoanForm()
+    user = User.objects.get(username=request.user)
+    form.fields['user'].initial = user.id
     if request.method == 'POST':
         form = LoanForm(request.POST)
         if form.is_valid():
+            form.fields['user'] = user
             form.save()
-
             return redirect('dashboard')
-
-
-
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
         context = {
             'company':company,
+            'loan_data':loan_data,
             'form':form
         }
     else:
         context = {
-            'form':form
+            'form':form,
+            'loan_data':loan_data,
         }
     return render(request, 'apply_loan.html',context)
+def delete_loan(request,id):
+    obj = Loan.objects.get(id=id, user=request.user)
+    obj.delete()
+    return redirect('apply_loan')
+
 
 @login_required
 def company_profile(request):
@@ -311,3 +318,28 @@ def shareholders(request):
             'team':team,
         }
     return render(request,'shareholders.html',context)
+
+def chat(request):
+    if request.method =='POST':
+        message = request.POST["message"]
+        Chat.objects.create(message=message,sender_id=request.user.id)
+        return redirect('chat')
+    else:
+        chat = Chat.objects.filter(sender = request.user)
+        reply = Reply.objects.filter(sender = request.user)
+        if CompanySetup.objects.filter()[:1].exists():
+            company = CompanySetup.objects.filter()[:1].get()
+            context = {
+                'company':company,
+                'chat':chat,
+                'reply':reply,
+                
+            }
+        else:
+            context = {
+                'chat':chat,
+                'reply':reply,
+                
+            }
+        return render(request,'chat.html',context)
+

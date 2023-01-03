@@ -16,6 +16,12 @@ class SliderFields(admin.ModelAdmin):
 class BookingFields(admin.ModelAdmin):
     list_display= ('name', 'tour')
 
+class ChatFields(admin.ModelAdmin):
+    list_display= ('message', 'sender','is_responded')
+
+class ReplyFields(admin.ModelAdmin):
+    list_display= ('message', 'sender')
+
 
 admin.site.unregister(Attachment)
 admin.site.register(Slider,SliderFields)
@@ -34,3 +40,5 @@ admin.site.register(Shareholder)
 admin.site.register(CompanySetup,CompanyField)
 admin.site.register(CompanyProfile)
 admin.site.register(Loan)
+admin.site.register(Chat,ChatFields)
+admin.site.register(Reply,ReplyFields)

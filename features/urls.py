@@ -20,8 +20,10 @@ urlpatterns = [
     path('apply_loan/', views.apply_loan, name="apply_loan"),
     path('company_profile/', views.company_profile, name="company_profile"),
     path('shareholders/', views.shareholders, name="shareholders"),
+    path('chat/', views.chat, name="chat"),
     path('service_detail/<int:id>', views.service_detail, name="service_detail"),
     path('blog_detail/<int:id>', views.blog_detail, name="blog_detail"),
+    path('delete_loan/<int:id>', views.delete_loan, name="delete_loan"),
     
     
     

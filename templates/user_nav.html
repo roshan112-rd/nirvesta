@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" justify-content-between>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Profile</a>
+        <a class="nav-item nav-link active" href="{% url 'apply_loan' %}">Apply Loan</a>
+        <a class="nav-item nav-link active" href="{% url 'company_profile' %}">Company Profile</a>
+        <a class="nav-item nav-link active" href="{% url 'chat' %}">Chat</a>
+        
+      </div>
+      
+    </div>
+    <div>
+       <a href=" {% url 'logout' %} "> <button class="btn btn-primary">Logout</button></a>
+      </div>
+  </nav>

@@ -1,47 +1,111 @@
 {% load static %} {% include 'header.html' %}
 
-<div class="container" style="margin-top:50px;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" justify-content-between>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Profile</a>
-            <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Apply Loan</a>
-            <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Company Profile</a>
-            
-          </div>
-          
-        </div>
-        <div>
-           <a href=" {% url 'logout' %} "> <button class="btn btn-primary">Logout</button></a>
-          </div>
-    </nav>
 
-    <div class="container">
+<div class="container" style="margin-top:50px;">
+  {% include 'user_nav.html' %}
+  {% if loan_data %}
+  {% for loan_data in loan_data %}
+
+<div class="container table-responsive py-5">
+  <table class="table table-bordered">
+    <tr>
+      <th scope="col">You have already applied for loan please wait for admin approval before applying for another application.</th>
+      <th class = "data"></th>
+      <th scope="col"></th>
+      <th  class = "data"><a href="{% url 'delete_loan' id=loan_data.id %}"><i class="icofont-ui-delete"></i></a></th>
+    </tr>
+  </table>
+  <table class="table table-bordered table-hover">
+      <tr>
+        <th scope="col">desired_loan_amount</th>
+        <th class = "data">{{loan_data.desired_loan_amount}}</th>
+        <th scope="col">annual_income</th>
+        <th  class = "data">{{loan_data.annual_income}}</th>
+      </tr>
+      <tr>
+        <th scope="col">use_of_loan</th>
+        <th scope="col" class = "data">{{loan_data.use_of_loan}}</th>
+        <th scope="col">name</th>
+        <th scope="col" class = "data">{{loan_data.name}}</th>
+      </tr>
+      <tr>
+        <th scope="col">date_of_birth</th>
+        <th scope="col" class = "data">{{loan_data.date_of_birth}}</th>
+        <th scope="col">marital_status</th>
+        <th scope="col" class = "data">{{loan_data.marital_status}}</th>
+      </tr>
+      <tr>
+        <th scope="col">email</th>
+        <th scope="col" class = "data">{{loan_data.email}}</th>
+        <th scope="col">phone</th>
+        <th scope="col" class = "data">{{loan_data.phone}}</th>
+      </tr>
+      <tr>
+        <th scope="col">address</th>
+        <th scope="col" class = "data">{{loan_data.address}}</th>
+        <th scope="col">Living Since</th>
+        <th scope="col" class = "data">{{loan_data.how_long_have_you_lived_in_your_given_address}}</th>
+      </tr>
+      <tr>
+        <th scope="col">present_employer_name</th>
+        <th scope="col" class = "data">{{loan_data.present_employer_name}}</th>
+        <th scope="col">occupation</th>
+        <th scope="col" class = "data">{{loan_data.occupation}}</th>
+      </tr>
+      <tr>
+        <th scope="col">years_of_experience</th>
+        <th scope="col" class = "data">{{loan_data.years_of_experience}}</th>
+        <th scope="col">gross_monthly_income</th>
+        <th scope="col" class = "data">{{loan_data.gross_monthly_income}}</th>
+      </tr>
+      <tr>
+        <th scope="col">monthly_rent</th>
+        <th scope="col" class = "data">{{loan_data.monthly_rent}}</th>
+        <th scope="col">down_payment</th>
+        <th scope="col" class = "data">{{loan_data.down_payment}}</th>
+      </tr>
+      <tr>
+        <th scope="col">comments</th>
+        <th scope="col" class = "data">{{loan_data.comments}}</th>
+        <th scope="col">institution_name</th>
+        <th scope="col" class = "data">{{loan_data.institution_name}}</th>
+      </tr>
+      <tr>
+        <th scope="col">saving_account_number</th>
+        <th scope="col" class = "data">{{loan_data.saving_account_number}}</th>
+        <th scope="col">institution_address</th>
+        <th scope="col" class = "data">{{loan_data.institution_address}}</th>
+      </tr>
+      <tr>
+        <th scope="col">phone_number</th>
+        <th scope="col" class = "data">{{loan_data.phone_number}}</th>
+        <th scope="col">Applied Date</th>
+        <th scope="col" class = "data">{{loan_data.created}}</th>
+        
+      </tr>
+      <style>
+        .data{
+          font-weight:unset;
+        }
+      </style>
+  </table>
+  </div>
+
+  
+
+  {% endfor %}
+  {% else %}
+  <div class="container">
       <div class="form-wrap content-column col-lg-6 col-md-12 col-sm-12 mb-0">	
         {% load crispy_forms_tags %}
         <form action="{% url 'apply_loan' %}" method = 'POST'>
           {% csrf_token %}
-          {% comment %} {{ form|crispy }} {% endcomment %}
           {% crispy form %}
-
-          <div>
-            <button class="btn btn-primary mt-5" type="submit">Submit</button>
-           </div>
         </form>
       </div>	
     </div>
-    {% comment %} <div class="container">
-      <div class="form-wrap content-column col-lg-6 col-md-12 col-sm-12 mb-0">	
-        <form action="{% url 'apply_loan' %}" method = 'POST'>
-          {% csrf_token %}
-          {{form.as_ul}}
-
-          <div>
-            <button class="btn btn-primary mt-5" type="submit">Submit</button>
-           </div>
-        </form>
-      </div>	
-    </div> {% endcomment %}
+  {% endif %}
+    
 <style>
 
 .form-input {
@@ -60,6 +124,9 @@ fieldset legend{
 }
 .help-block strong{
   color:red;
+}
+#div_id_user{
+  display:none;
 }
 </style>
 </div>

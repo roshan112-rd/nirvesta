@@ -12,7 +12,6 @@ class LoanForm(forms.ModelForm):
 		('unmarried', 'unmarried'),
         ('married', 'married'),
     )
-	
 	desired_loan_amount = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-input','placeholder': '100000'}))
 	annual_income = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-input','placeholder': '100000'}))
 	use_of_loan = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'business_purpose'}))
@@ -21,22 +20,22 @@ class LoanForm(forms.ModelForm):
 	date_of_birth = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '100000'}))
 	marital_status = forms.CharField( widget=forms.Select(choices=STATUS_CHOICES, attrs={'class': 'form-input'}))
 	email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'Alex@gmail.com'}))
-	phone = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '9841012145'}))
+	phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '9841012145'}))
 	address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'Baneshwor 8, Kathmandu'}))
 	how_long_have_you_lived_in_your_given_address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '2 Years'}))
 
 	present_employer_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input' ,'placeholder': 'Nabil Corporation'}))
 	occupation = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'Manager'}))
-	years_of_experience = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '5'}))
-	gross_monthly_income = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '50000'}))
-	monthly_rent = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '20000'}))
-	down_payment = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '50000'}))
+	years_of_experience = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '5'}))
+	gross_monthly_income = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '50000'}))
+	monthly_rent = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '20000'}))
+	down_payment = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '50000'}))
 	comments = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'Write your comments.....'}))
 
 	institution_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'Global IME Bank'}))
 	saving_account_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '1258455165145524'}))
-	address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'New- Baneshwor'}))
-	phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '01-1254541'}))
+	institution_address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': 'New- Baneshwor'}))
+	phone_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input','placeholder': '01-1254541'}))
 
 
 	class Meta:
@@ -50,6 +49,7 @@ class LoanForm(forms.ModelForm):
 		self.helper.layout = Layout(
 			Fieldset(
 				'',
+				'user',
 				'annual_income',
 				'desired_loan_amount',
 				'use_of_loan',
@@ -64,18 +64,7 @@ class LoanForm(forms.ModelForm):
 				'phone',
 				'address',
 				'how_long_have_you_lived_in_your_given_address',
-				'present_employer_name',
-				'occupation',
-
-				'years_of_experience',
-				'gross_monthly_income',
-				'monthly_rent',
-				'down_payment',
-				'comments',
-				'institution_name',
-				'saving_account_number',
-				'address',
-				'phone_number',
+				
 			),
 			Fieldset(
 				'EMPLOYMENT INFORMATION',
@@ -93,8 +82,9 @@ class LoanForm(forms.ModelForm):
 				'Bank References',
 				'institution_name',
 				'saving_account_number',
-				'address',
+				'institution_address',
 				'phone_number',				
-			)
+			),
+			Submit('submit', 'Submit', css_class='btn btn-primary mt-5'),
 		)
 	
