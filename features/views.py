@@ -381,6 +381,7 @@ def bulk_mail(request):
             subject = request.POST["subject"]
             message = request.POST["message"]
             shareholders=Shareholder.objects.all()
+
             for shareholders in shareholders:
                 subject = f"{subject}"
                 message = f"{message}"
@@ -391,6 +392,7 @@ def bulk_mail(request):
                 ]
                 send_mail(subject, message, email_from, recipient_list)
                 SentMail.objects.create(email=email,subject=subject,message=message)
+
             return redirect("bulk_mail")
             
         if CompanySetup.objects.filter()[:1].exists():
@@ -402,5 +404,68 @@ def bulk_mail(request):
             context = {
             }
         return render(request,'bulk_mail.html',context)
+    else:
+        return redirect('login')
+
+
+# def selected_mail(request):
+#     if request.user.is_superuser:
+#         if request.method =='POST':
+#             subject = request.POST["subject"]
+#             message = request.POST["message"]
+#             print(request.POST['selected'])
+#             selected = ''
+#             for request.POST['selected'] in selected:
+#                 print(selected)
+#             return redirect("selected_mail")
+#         else:
+#             if CompanySetup.objects.filter()[:1].exists():
+#                 shareholders=Shareholder.objects.all()
+#                 company = CompanySetup.objects.filter()[:1].get()
+#                 context = {
+#                     'company':company,
+#                     'shareholders':shareholders,
+#                 }
+#             else:
+#                 context = {
+#                     'shareholders':shareholders,
+#                 }
+#             return render(request,'selected_mail.html',context)
+#     else:
+#         return redirect('login')
+
+
+
+def selected_mail(request):
+    if request.user.is_superuser:
+        if request.method =='POST':
+            subject = request.POST["subject"]
+            message = request.POST["message"]
+            email = request.POST.getlist("selected")
+
+            print(email)
+            for email in email:
+                subject = f"{subject}"
+                message = f"{message}"
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [
+                    email,
+                ]
+                send_mail(subject, message, email_from, recipient_list)
+                SentMail.objects.create(email=email,subject=subject,message=message)
+            return redirect("selected_mail")
+        else:
+            if CompanySetup.objects.filter()[:1].exists():
+                shareholders=Shareholder.objects.all()
+                company = CompanySetup.objects.filter()[:1].get()
+                context = {
+                    'company':company,
+                    'shareholders':shareholders,
+                }
+            else:
+                context = {
+                    'shareholders':shareholders,
+                }
+            return render(request,'selected_mail.html',context)
     else:
         return redirect('login')

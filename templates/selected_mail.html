@@ -1,0 +1,65 @@
+{% load static %}
+{% include 'header.html' %}
+<div class="container" style="margin-top:20px;">
+{% include 'mail_nav.html' %}
+    
+
+    <div class="boxed-inner">
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <!-- Contact Form -->
+            <form method="post" action=" {% url 'selected_mail' %} ">
+                {% csrf_token %}
+                <div class="row clearfix">
+
+                  <div class="row mt-5">
+                    <div class="col-12">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Shareholder Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Select</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for shareholders in shareholders %}
+                          <tr>
+                            <td>{{shareholders.user.first_name}}</td>
+                            <td>{{shareholders.email}}</td>
+                            <td>
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" name="selected" class="custom-control-input" id="customCheck1" value="{{shareholders.email}}">
+                              </div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                        <input type="text" name="subject" placeholder="Subject*" required>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                        <textarea name="message" placeholder="Message*" required></textarea>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                        <button class="theme-btn btn-style-one" type="submit" name="submit-form"><span class="txt">Send Mail</span></button>
+                    </div>
+
+                </div>
+            </form>
+            <p class="form-messege"></p>
+
+        </div>
+    </div>
+  </div>
+
+
+
+{% include 'footer.html' %}
