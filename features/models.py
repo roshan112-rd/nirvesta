@@ -124,8 +124,9 @@ class Brochures(models.Model):
 class Shareholder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     contact = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
     no_of_share = models.IntegerField(null=True, blank=True)
+    email = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
     photo = models.ImageField(upload_to="shareholder_images/",null=True, blank=True)
     
     def __str__(self):
@@ -240,3 +241,15 @@ class Reply (models.Model):
 
     class Meta:
         verbose_name_plural = "0001. Reply"
+
+class SentMail (models.Model):
+    email = models.TextField()
+    subject = models.TextField()
+    message = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.subject
+
+    class Meta:
+        verbose_name_plural = "18. Sent Mail"

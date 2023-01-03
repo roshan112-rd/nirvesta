@@ -8,6 +8,8 @@ from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
 from .forms import *
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 def home(request):
     slider = Slider.objects.all().order_by("order")
@@ -343,3 +345,62 @@ def chat(request):
             }
         return render(request,'chat.html',context)
 
+
+def mail(request):
+    if request.user.is_superuser:
+        if request.method =='POST':
+            email = request.POST["email"]
+            subject = request.POST["subject"]
+            message = request.POST["message"]
+
+            subject = f"{subject}"
+            message = f"{message}"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [
+                email,
+            ]
+            send_mail(subject, message, email_from, recipient_list)
+            SentMail.objects.create(email=email,subject=subject,message=message)
+            return redirect("mail")
+
+        if CompanySetup.objects.filter()[:1].exists():
+            company = CompanySetup.objects.filter()[:1].get()
+            context = {
+                'company':company,
+            }
+        else:
+            context = {
+            }
+        return render(request,'send_mail.html',context)
+    else:
+        return redirect('login')
+
+def bulk_mail(request):
+    if request.user.is_superuser:
+        if request.method =='POST':
+            subject = request.POST["subject"]
+            message = request.POST["message"]
+            shareholders=Shareholder.objects.all()
+            for shareholders in shareholders:
+                subject = f"{subject}"
+                message = f"{message}"
+                email=shareholders.email
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [
+                    email,
+                ]
+                send_mail(subject, message, email_from, recipient_list)
+                SentMail.objects.create(email=email,subject=subject,message=message)
+            return redirect("bulk_mail")
+            
+        if CompanySetup.objects.filter()[:1].exists():
+            company = CompanySetup.objects.filter()[:1].get()
+            context = {
+                'company':company,
+            }
+        else:
+            context = {
+            }
+        return render(request,'bulk_mail.html',context)
+    else:
+        return redirect('login')

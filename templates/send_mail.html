@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'header.html' %}
+<div class="container" style="margin-top:20px;">
+{% include 'mail_nav.html' %}
+<div class="boxed-inner">
+    <!-- Contact Form -->
+    <div class="contact-form mt-5">
+        <!-- Contact Form -->
+        <form method="post" action=" {% url 'mail' %} ">
+            {% csrf_token %}
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                    <input type="email" name="email" placeholder="Emaill Address *" required>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                    <input type="text" name="subject" placeholder="Subject*" required>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                    <textarea name="message" placeholder="Message*" required></textarea>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                    <button class="theme-btn btn-style-one" type="submit" name="submit-form"><span class="txt">Send Mail</span></button>
+                </div>
+
+            </div>
+        </form>
+        <p class="form-messege"></p>
+
+    </div>
+    <!--End Contact Form -->
+</div>
+
+</div>
+
+{% include 'footer.html' %}

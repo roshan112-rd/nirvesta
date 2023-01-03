@@ -216,3 +216,10 @@ JAZZMIN_UI_TWEAKS = {
     "theme": "simplex",
     # "dark_mode_theme": "darkly",
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "mail.nirvestagroup.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "noreply@nirvestagroup.com"
+EMAIL_HOST_PASSWORD = "noreply@nirvesta@123"
