@@ -21,3 +21,5 @@ urlpatterns = [
     path('', include('features.urls')),
     path('summernote/', include('django_summernote.urls')),
 ]
+
+handler404 = "features.views.page_not_found_view"

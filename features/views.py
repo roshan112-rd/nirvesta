@@ -469,3 +469,19 @@ def selected_mail(request):
             return render(request,'selected_mail.html',context)
     else:
         return redirect('login')
+
+
+
+
+def page_not_found_view(request, exception):
+    if CompanySetup.objects.filter()[:1].exists():
+        company = CompanySetup.objects.filter()[:1].get()
+        context = {
+        'company':company,
+        'shareholders':shareholders,
+        }
+    else:
+        context = {
+        'shareholders':shareholders,
+        }
+    return render(request, "error404.html", context)
