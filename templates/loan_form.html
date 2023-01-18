@@ -1,0 +1,418 @@
+{% load static %} {% include 'header.html' %}
+
+<div class="container" style="margin-top: 50px">
+  <div class="container">
+    <div class="form-wrap content-column col-lg-6 col-md-12 col-sm-12 mb-0">
+      <form action="{% url 'apply_loan' %}" method="POST">
+        {% csrf_token %}
+
+        <fieldset>
+          <div id="div_id_annual_income" class="control-group required-field">
+            <label for="id_annual_income" class="control-label requiredField">
+              Annual income<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="number"
+                name="annual_income"
+                class="form-input numberinput"
+                placeholder="100000"
+                required=""
+                id="id_annual_income"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_desired_loan_amount"
+            class="control-group required-field"
+          >
+            <label
+              for="id_desired_loan_amount"
+              class="control-label requiredField"
+            >
+              Desired loan amount<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="number"
+                name="desired_loan_amount"
+                class="form-input numberinput"
+                placeholder="100000"
+                required=""
+                id="id_desired_loan_amount"
+              />
+            </div>
+          </div>
+          <div id="div_id_use_of_loan" class="control-group required-field">
+            <label for="id_use_of_loan" class="control-label requiredField">
+              Use of loan<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="use_of_loan"
+                class="form-input textinput textInput"
+                placeholder="business_purpose"
+                required=""
+                id="id_use_of_loan"
+              />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>contact information</legend>
+          <div id="div_id_name" class="control-group required-field">
+            <label for="id_name" class="control-label requiredField">
+              Name<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="name"
+                class="form-input textinput textInput"
+                placeholder="Alex Rodrigues"
+                required=""
+                id="id_name"
+              />
+            </div>
+          </div>
+          <div id="div_id_date_of_birth" class="control-group required-field">
+            <label for="id_date_of_birth" class="control-label requiredField">
+              Date of birth<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="date_of_birth"
+                class="form-input textinput textInput"
+                placeholder="100000"
+                required=""
+                id="id_date_of_birth"
+              />
+            </div>
+          </div>
+          <div id="div_id_marital_status" class="control-group required-field">
+            <label for="id_marital_status" class="control-label requiredField">
+              Marital status<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <select
+                name="marital_status"
+                class="form-input select"
+                id="id_marital_status"
+              >
+                <option value="unmarried">unmarried</option>
+                <option value="married">married</option>
+              </select>
+            </div>
+          </div>
+          <div id="div_id_email" class="control-group required-field">
+            <label for="id_email" class="control-label requiredField">
+              Email<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="email"
+                class="form-input textinput textInput"
+                placeholder="Alex@gmail.com"
+                required=""
+                id="id_email"
+              />
+            </div>
+          </div>
+          <div id="div_id_phone" class="control-group required-field">
+            <label for="id_phone" class="control-label requiredField">
+              Phone<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="phone"
+                class="form-input textinput textInput"
+                placeholder="9841012145"
+                required=""
+                id="id_phone"
+              />
+            </div>
+          </div>
+          <div id="div_id_address" class="control-group required-field">
+            <label for="id_address" class="control-label requiredField">
+              Address<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="address"
+                class="form-input textinput textInput"
+                placeholder="Baneshwor 8, Kathmandu"
+                required=""
+                id="id_address"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_how_long_have_you_lived_in_your_given_address"
+            class="control-group required-field"
+          >
+            <label
+              for="id_how_long_have_you_lived_in_your_given_address"
+              class="control-label requiredField"
+            >
+              How long have you lived in your given address<span
+                class="asteriskField"
+                >*</span
+              >
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="how_long_have_you_lived_in_your_given_address"
+                class="form-input textinput textInput"
+                placeholder="2 Years"
+                required=""
+                id="id_how_long_have_you_lived_in_your_given_address"
+              />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>EMPLOYMENT INFORMATION</legend>
+          <div
+            id="div_id_present_employer_name"
+            class="control-group required-field"
+          >
+            <label
+              for="id_present_employer_name"
+              class="control-label requiredField"
+            >
+              Present employer name<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="present_employer_name"
+                class="form-input textinput textInput"
+                placeholder="Nabil Corporation"
+                required=""
+                id="id_present_employer_name"
+              />
+            </div>
+          </div>
+          <div id="div_id_occupation" class="control-group required-field">
+            <label for="id_occupation" class="control-label requiredField">
+              Occupation<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="occupation"
+                class="form-input textinput textInput"
+                placeholder="Manager"
+                required=""
+                id="id_occupation"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_years_of_experience"
+            class="control-group required-field"
+          >
+            <label
+              for="id_years_of_experience"
+              class="control-label requiredField"
+            >
+              Years of experience<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="years_of_experience"
+                class="form-input textinput textInput"
+                placeholder="5"
+                required=""
+                id="id_years_of_experience"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_gross_monthly_income"
+            class="control-group required-field"
+          >
+            <label
+              for="id_gross_monthly_income"
+              class="control-label requiredField"
+            >
+              Gross monthly income<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="gross_monthly_income"
+                class="form-input textinput textInput"
+                placeholder="50000"
+                required=""
+                id="id_gross_monthly_income"
+              />
+            </div>
+          </div>
+          <div id="div_id_monthly_rent" class="control-group required-field">
+            <label for="id_monthly_rent" class="control-label requiredField">
+              Monthly rent<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="monthly_rent"
+                class="form-input textinput textInput"
+                placeholder="20000"
+                required=""
+                id="id_monthly_rent"
+              />
+            </div>
+          </div>
+          <div id="div_id_down_payment" class="control-group required-field">
+            <label for="id_down_payment" class="control-label requiredField">
+              Down payment<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="down_payment"
+                class="form-input textinput textInput"
+                placeholder="50000"
+                required=""
+                id="id_down_payment"
+              />
+            </div>
+          </div>
+          <div id="div_id_comments" class="control-group required-field">
+            <label for="id_comments" class="control-label requiredField">
+              Comments<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="comments"
+                class="form-input textinput textInput"
+                placeholder="Write your comments....."
+                required=""
+                id="id_comments"
+              />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Bank References</legend>
+          <div
+            id="div_id_institution_name"
+            class="control-group required-field"
+          >
+            <label
+              for="id_institution_name"
+              class="control-label requiredField"
+            >
+              Institution name<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="institution_name"
+                class="form-input textinput textInput"
+                placeholder="Global IME Bank"
+                required=""
+                id="id_institution_name"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_saving_account_number"
+            class="control-group required-field"
+          >
+            <label
+              for="id_saving_account_number"
+              class="control-label requiredField"
+            >
+              Saving account number<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="saving_account_number"
+                class="form-input textinput textInput"
+                placeholder="1258455165145524"
+                required=""
+                id="id_saving_account_number"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_institution_address"
+            class="control-group required-field"
+          >
+            <label
+              for="id_institution_address"
+              class="control-label requiredField"
+            >
+              Institution address<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="institution_address"
+                class="form-input textinput textInput"
+                placeholder="New- Baneshwor"
+                required=""
+                id="id_institution_address"
+              />
+            </div>
+          </div>
+          <div id="div_id_phone_number" class="control-group required-field">
+            <label for="id_phone_number" class="control-label requiredField">
+              Phone number<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="phone_number"
+                class="form-input textinput textInput"
+                placeholder="01-1254541"
+                required=""
+                id="id_phone_number"
+              />
+            </div>
+          </div>
+        </fieldset>
+        <input
+          type="submit"
+          name="submit"
+          value="Submit"
+          class="btn btn-primary btn btn-primary mt-5"
+          id="submit-id-submit"
+        />
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .form-input {
+      height: 60px;
+      width: 100%;
+      padding: 0.4rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      border: 1px solid rgb(204, 204, 204);
+    }
+    fieldset {
+      margin-top: 20px;
+    }
+    fieldset legend {
+      color: black;
+    }
+    .help-block strong {
+      color: red;
+    }
+  </style>
+</div>
+
+{% include 'footer.html' %}

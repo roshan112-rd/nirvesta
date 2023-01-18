@@ -26,7 +26,6 @@ urlpatterns = [
     path('selected_mail/', views.selected_mail, name="selected_mail"),
     path('service_detail/<int:id>', views.service_detail, name="service_detail"),
     path('blog_detail/<int:id>', views.blog_detail, name="blog_detail"),
-    path('delete_loan/<int:id>', views.delete_loan, name="delete_loan"),
     
     
     

@@ -58,8 +58,8 @@
 					<div class="top-left">
 						<!-- Info List -->
 						<ul class="info-list">
-							<li><a href="mailto:hello@consulte.co"><span class="icon icofont-envelope"></span>{{company.email}}</a></li>
-							<li><a href="tel:+1212-226-3126"><span class="icon icofont-phone"></span> {{company.contact}}</a></li>
+							<li><a href="mailto:{{company.email}}"><span class="icon icofont-envelope"></span>{{company.email}}</a></li>
+							<li><a href="tel:{{company.contact}}"><span class="icon icofont-phone"></span> {{company.contact}}</a></li>
 							<li><a href="{% url 'contact' %}"><span class="icon icofont-clock-time"></span>{{company.opening_hours}}</a></li>
 						</ul>
 					</div>
@@ -68,7 +68,7 @@
                     <div class="top-right pull-right">
 						<!-- Social Box -->
 						<ul class="social-box">
-							<li class="share">Our Social</li>
+							<li><a href="{% url 'apply_loan' %}" class="share">Apply Loan</a></li>
 							<li><a href="{{company.twitter_url}}" class="icofont-twitter"></a></li>
 							<li><a href="{{company.facebook_url}}" class="icofont-facebook"></a></li>
 							<li><a href="{{company.instagram_url}}" class="icofont-instagram"></a></li>

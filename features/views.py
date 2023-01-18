@@ -10,6 +10,8 @@ from django.contrib.auth import logout as django_logout
 from .forms import *
 from django.conf import settings
 from django.core.mail import send_mail
+from nanoid import generate
+
 # Create your views here.
 def home(request):
     slider = Slider.objects.all().order_by("order")
@@ -261,35 +263,70 @@ def logout(request):
     messages.info(request, "Logged out successfully.")
     return redirect("home")
 
-@login_required
+
 def apply_loan(request):
-    loan_data = Loan.objects.filter(user=request.user)
-    form = LoanForm()
-    user = User.objects.get(username=request.user)
-    form.fields['user'].initial = user.id
     if request.method == 'POST':
-        form = LoanForm(request.POST)
-        if form.is_valid():
-            form.fields['user'] = user
-            form.save()
-            return redirect('dashboard')
+        desired_loan_amount = request.POST['desired_loan_amount']
+        annual_income = request.POST['annual_income']
+        use_of_loan = request.POST['use_of_loan']
+        name = request.POST['name']
+        date_of_birth = request.POST['date_of_birth']
+        marital_status = request.POST['marital_status']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        how_long_have_you_lived_in_your_given_address = request.POST['how_long_have_you_lived_in_your_given_address']
+        address = request.POST['address']
+        present_employer_name = request.POST['present_employer_name']
+        occupation = request.POST['marital_status']
+        years_of_experience = request.POST['years_of_experience']
+        gross_monthly_income = request.POST['gross_monthly_income']
+        monthly_rent = request.POST['monthly_rent']
+        down_payment = request.POST['down_payment']
+        comments = request.POST['comments']
+        institution_name = request.POST['institution_name']
+        saving_account_number = request.POST['saving_account_number']
+        institution_address = request.POST['institution_address']
+        phone_number = request.POST['phone_number']
+
+        if User.objects.filter(email = email).first():
+            messages.error(request, "This email is already taken")
+            print(messages)
+            return redirect('apply_loan')
+
+
+        password = generate(size=10)
+        user = User.objects.create_user(username=email, password=password)
+        user.save()
+        subject = 'User Account Creation'
+        message = f"Hello {name}, thank you for becoming a member. Your username is {user.username} and your password is {password}"
+        
+        message = f"{message}"
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [
+            email,
+        ]
+        send_mail(subject, message, email_from, recipient_list)
+        
+        Borrower.objects.create(user=user, name=name, email=email, contact=phone_number, address=address)
+
+        Loan.objects.create(user=user, desired_loan_amount = desired_loan_amount,annual_income = annual_income ,use_of_loan = use_of_loan ,name = name ,
+        date_of_birth = date_of_birth,marital_status = marital_status ,email = email ,phone = phone ,
+        how_long_have_you_lived_in_your_given_address = how_long_have_you_lived_in_your_given_address ,
+        address = address ,present_employer_name = present_employer_name ,occupation = occupation ,years_of_experience = years_of_experience ,
+        gross_monthly_income = gross_monthly_income ,monthly_rent = monthly_rent, down_payment = down_payment ,comments = comments ,
+        institution_name = institution_name ,saving_account_number = saving_account_number ,institution_address = institution_address ,phone_number = phone_number)
+        return redirect('home')
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
         context = {
             'company':company,
-            'loan_data':loan_data,
-            'form':form
         }
     else:
         context = {
-            'form':form,
-            'loan_data':loan_data,
         }
-    return render(request, 'apply_loan.html',context)
-def delete_loan(request,id):
-    obj = Loan.objects.get(id=id, user=request.user)
-    obj.delete()
-    return redirect('apply_loan')
+    return render(request, 'loan_form.html',context)
+    # return render(request, 'apply_loan.html',context)
+
 
 
 @login_required

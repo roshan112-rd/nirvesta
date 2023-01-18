@@ -136,6 +136,7 @@ class Shareholder(models.Model):
         verbose_name_plural = "10. Shareholders"
 
 class Borrower(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     email = models.EmailField()
     contact = models.CharField(max_length=200)
@@ -213,6 +214,8 @@ class Loan(models.Model):
     saving_account_number = models.TextField()
     institution_address = models.TextField()
     phone_number = models.TextField()
+
+    verified = models.BooleanField(default = 0)
     created = models.DateField(auto_now_add = True)
 
     def __str__(self):
