@@ -20,6 +20,7 @@ urlpatterns = [
     path('apply_loan/', views.apply_loan, name="apply_loan"),
     path('company_profile/', views.company_profile, name="company_profile"),
     path('shareholders/', views.shareholders, name="shareholders"),
+    path('borrower_dashboard/', views.borrower_dashboard, name="borrower_dashboard"),
     path('chat/', views.chat, name="chat"),
     path('mail/', views.mail, name="mail"),
     path('bulk_mail/', views.bulk_mail, name="bulk_mail"),

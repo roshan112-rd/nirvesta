@@ -2178,6 +2178,7 @@ img{
 	text-transform:uppercase;
 }
 
+.consult-form form input[type="password"],
 .consult-form form input[type="text"],
 .consult-form form input[type="search"],
 .consult-form form input[type="tel"],

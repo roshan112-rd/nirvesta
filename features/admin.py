@@ -21,8 +21,13 @@ class ChatFields(admin.ModelAdmin):
 
 class ReplyFields(admin.ModelAdmin):
     list_display= ('message', 'sender')
+
+    
 class MailFields(admin.ModelAdmin):
     list_display= ('email', 'subject','date')
+
+class LoanFields(admin.ModelAdmin):
+    list_display= ('name', 'email','desired_loan_amount','loan_status')
 
 
 admin.site.unregister(Attachment)
@@ -41,7 +46,7 @@ admin.site.register(Borrower)
 admin.site.register(Shareholder)
 admin.site.register(CompanySetup,CompanyField)
 admin.site.register(CompanyProfile)
-admin.site.register(Loan)
+admin.site.register(Loan,LoanFields)
 admin.site.register(SentMail,MailFields)
 admin.site.register(Chat,ChatFields)
 admin.site.register(Reply,ReplyFields)

@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class CompanySetup(models.Model):
     data_set = models.TextField()
-
     logo = models.ImageField(upload_to="company_images")
     location = models.TextField()
     contact = models.TextField()
@@ -23,6 +23,7 @@ class CompanySetup(models.Model):
         return self.data_set
     class Meta:
         verbose_name_plural = "01. Company Setup" 
+
 
 # Create your models here.
 class Slider(models.Model):
@@ -214,8 +215,8 @@ class Loan(models.Model):
     saving_account_number = models.TextField()
     institution_address = models.TextField()
     phone_number = models.TextField()
-
-    verified = models.BooleanField(default = 0)
+    LOAN_STATUS = (("pending", "pending"), ("rejected", "rejected"), ("approved", "approved"))
+    loan_status = models.CharField(max_length=20, choices=LOAN_STATUS, default="pending")
     created = models.DateField(auto_now_add = True)
 
     def __str__(self):

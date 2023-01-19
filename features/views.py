@@ -206,8 +206,11 @@ def login(request):
     if request.user.is_authenticated and request.user.is_superuser:
         return redirect("admin:index")
 
-    elif request.user.is_authenticated:
+    elif request.user.is_authenticated and not request.user.is_superuser and request.user.is_staff:
         return redirect('dashboard')
+    
+    elif request.user.is_authenticated and not request.user.is_superuser and not request.user.is_staff:
+        return redirect('borrower_dashboard')
 
     else:
         if request.method == "POST":
@@ -224,10 +227,15 @@ def login(request):
                 messages.info(request, "Logged in successfully.")
                 return redirect("admin:index")
 
-            elif user is not None and not user.is_superuser:
+            elif user is not None and not user.is_superuser and  user.is_staff:
                 auth.login(request, user)
                 messages.info(request, "Logged in successfully.")
-                return redirect("dashboard")   
+                return redirect("dashboard")
+                  
+            elif user is not None and not user.is_superuser and not user.is_staff:
+                auth.login(request, user)
+                messages.info(request, "Logged in successfully.")
+                return redirect("borrower_dashboard")   
         else:
             if CompanySetup.objects.filter()[:1].exists():
                 company = CompanySetup.objects.filter()[:1].get()
@@ -288,14 +296,20 @@ def apply_loan(request):
         institution_address = request.POST['institution_address']
         phone_number = request.POST['phone_number']
 
-        if User.objects.filter(email = email).first():
-            messages.error(request, "This email is already taken")
-            print(messages)
-            return redirect('apply_loan')
 
 
+        dob=date_of_birth.replace("-", "_")
+        initial = name + '@'+ dob
+        username = initial.replace(" ", "_").lower()
         password = generate(size=10)
-        user = User.objects.create_user(username=email, password=password)
+
+
+         
+        if User.objects.filter(username = username).first():
+            messages.error(request, "This email is already taken")
+            return redirect('apply_loan')
+        first_name, last_name = name.split(" ", 1)
+        user = User.objects.create_user(first_name = first_name, last_name=last_name, email=email, username=username, password=password)
         user.save()
         subject = 'User Account Creation'
         message = f"Hello {name}, thank you for becoming a member. Your username is {user.username} and your password is {password}"
@@ -306,7 +320,8 @@ def apply_loan(request):
             email,
         ]
         send_mail(subject, message, email_from, recipient_list)
-        
+        messages.error(request, "Your Login credentials are sent to your email address. " + email + " Please check your inbox. ")
+
         Borrower.objects.create(user=user, name=name, email=email, contact=phone_number, address=address)
 
         Loan.objects.create(user=user, desired_loan_amount = desired_loan_amount,annual_income = annual_income ,use_of_loan = use_of_loan ,name = name ,
@@ -325,7 +340,6 @@ def apply_loan(request):
         context = {
         }
     return render(request, 'loan_form.html',context)
-    # return render(request, 'apply_loan.html',context)
 
 
 
@@ -522,3 +536,22 @@ def page_not_found_view(request, exception):
         'shareholders':shareholders,
         }
     return render(request, "error404.html", context)
+
+
+@login_required
+def borrower_dashboard(request):
+    loan_data = Loan.objects.filter(user=request.user)
+
+    if CompanySetup.objects.filter()[:1].exists():
+        company = CompanySetup.objects.filter()[:1].get()
+        context = {
+        'company':company,
+        'loan_data':loan_data,
+        }
+    else:
+        context = {
+        'loan_data':loan_data,
+        }
+    return render(request, "borrower_dashboard.html", context)
+
+    
