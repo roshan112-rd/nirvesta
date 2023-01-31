@@ -169,7 +169,7 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "13. Borrowers"
+        verbose_name_plural = "13. Contact"
 
 
 
@@ -208,13 +208,20 @@ class Loan(models.Model):
     years_of_experience = models.TextField()
     gross_monthly_income = models.TextField()
     monthly_rent = models.TextField()
-    down_payment = models.TextField()
+    # down_payment = models.TextField()
     comments = models.TextField()
 
     institution_name = models.TextField()
     saving_account_number = models.TextField()
     institution_address = models.TextField()
     phone_number = models.TextField()
+
+    
+    photo = models.FileField(null=True, blank=True)
+    citi_front = models.FileField(null=True, blank=True)
+    citi_back = models.FileField(null=True, blank=True)
+
+
     LOAN_STATUS = (("pending", "pending"), ("rejected", "rejected"), ("approved", "approved"))
     loan_status = models.CharField(max_length=20, choices=LOAN_STATUS, default="pending")
     created = models.DateField(auto_now_add = True)
@@ -222,7 +229,7 @@ class Loan(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "14. Loan Forms"
+        verbose_name_plural = "15. Loan Forms"
 
 
 class Chat(models.Model):
@@ -234,7 +241,7 @@ class Chat(models.Model):
         return self.message
 
     class Meta:
-        verbose_name_plural = "00. Chat"
+        verbose_name_plural = "16. Chat"
 
 class Reply (models.Model):
     sender  = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -244,7 +251,7 @@ class Reply (models.Model):
         return self.message
 
     class Meta:
-        verbose_name_plural = "0001. Reply"
+        verbose_name_plural = "17. Reply"
 
 class SentMail (models.Model):
     email = models.TextField()

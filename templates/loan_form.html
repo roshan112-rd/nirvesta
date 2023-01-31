@@ -3,7 +3,7 @@
 <div class="container" style="margin-top: 50px">
   <div class="container">
     <div class="form-wrap content-column col-lg-6 col-md-12 col-sm-12 mb-0">
-      <form action="{% url 'apply_loan' %}" method="POST">
+      <form action="{% url 'apply_loan' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <fieldset>
@@ -271,7 +271,7 @@
               />
             </div>
           </div>
-          <div id="div_id_down_payment" class="control-group required-field">
+          {% comment %} <div id="div_id_down_payment" class="control-group required-field">
             <label for="id_down_payment" class="control-label requiredField">
               Down payment<span class="asteriskField">*</span>
             </label>
@@ -285,7 +285,7 @@
                 id="id_down_payment"
               />
             </div>
-          </div>
+          </div> {% endcomment %}
           <div id="div_id_comments" class="control-group required-field">
             <label for="id_comments" class="control-label requiredField">
               Comments<span class="asteriskField">*</span>
@@ -383,6 +383,68 @@
             </div>
           </div>
         </fieldset>
+
+
+
+        <fieldset>
+          <legend>Documents</legend>
+          <div
+            id="div_id_institution_name"
+            class="control-group required-field"
+            >
+            <label
+              for="id_institution_name"
+              class="control-label requiredField"
+            >
+              Passport Size Photo<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="file"
+                name="photo"
+                required
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_institution_name"
+            class="control-group required-field mt-3"
+            
+            >
+            <label
+              for="id_institution_name"
+              class="control-label requiredField"
+            >
+              Citizenship Front<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="file"
+                name="citi_front"
+                required
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_institution_name"
+            class="control-group required-field mt-3"
+            >
+            <label
+              for="id_institution_name"
+              class="control-label requiredField"
+            >
+              Citizenship Back<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="file"
+                name="citi_back"
+                required
+              />
+            </div>
+          </div>
+          
+        </fieldset>
         <input
           type="submit"
           name="submit"
@@ -406,7 +468,7 @@
     fieldset {
       margin-top: 20px;
     }
-    fieldset legend {
+    legend,label {
       color: black;
     }
     .help-block strong {

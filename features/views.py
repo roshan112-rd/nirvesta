@@ -289,12 +289,15 @@ def apply_loan(request):
         years_of_experience = request.POST['years_of_experience']
         gross_monthly_income = request.POST['gross_monthly_income']
         monthly_rent = request.POST['monthly_rent']
-        down_payment = request.POST['down_payment']
+        # down_payment = request.POST['down_payment']
         comments = request.POST['comments']
         institution_name = request.POST['institution_name']
         saving_account_number = request.POST['saving_account_number']
         institution_address = request.POST['institution_address']
         phone_number = request.POST['phone_number']
+        photo = request.FILES['photo']
+        citi_front = request.FILES['citi_front']
+        citi_back = request.FILES['citi_back']
 
 
 
@@ -328,8 +331,9 @@ def apply_loan(request):
         date_of_birth = date_of_birth,marital_status = marital_status ,email = email ,phone = phone ,
         how_long_have_you_lived_in_your_given_address = how_long_have_you_lived_in_your_given_address ,
         address = address ,present_employer_name = present_employer_name ,occupation = occupation ,years_of_experience = years_of_experience ,
-        gross_monthly_income = gross_monthly_income ,monthly_rent = monthly_rent, down_payment = down_payment ,comments = comments ,
-        institution_name = institution_name ,saving_account_number = saving_account_number ,institution_address = institution_address ,phone_number = phone_number)
+        gross_monthly_income = gross_monthly_income ,monthly_rent = monthly_rent,comments = comments ,
+        institution_name = institution_name ,saving_account_number = saving_account_number ,institution_address = institution_address ,phone_number = phone_number,
+        citi_front=citi_front, photo=photo, citi_back=citi_back)
         return redirect('home')
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
