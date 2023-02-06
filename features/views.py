@@ -3,11 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render,redirect
 from .models import *
+from .forms import *
 from django.core.paginator import Paginator
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
-from .forms import *
 from django.conf import settings
 from django.core.mail import send_mail
 from nanoid import generate
@@ -24,7 +24,11 @@ def home(request):
 
     testimonial = Testimonial.objects.all()
 
-    partners = Partner.objects.all()
+    # partners = Partner.objects.all()
+    # partners = CompanyProfile.objects.values('company_logo')
+    
+    partners = CompanyProfile.objects.all()
+
     team = Team.objects.all()
     paginator = Paginator(team, 3)
     page = request.GET.get("page")
@@ -52,7 +56,7 @@ def home(request):
 
 def about(request):
     testimonial = Testimonial.objects.all()
-    partners = Partner.objects.all()
+    partners = CompanyProfile.objects.all()
     team = Team.objects.all()
     faqs = Faqs.objects.all()
     files = Brochures.objects.all()
@@ -117,8 +121,8 @@ def service_detail(request,id):
     return render(request,'service_detail.html',context)
 
 def blogs(request):
-    blogs = Blog.objects.all()
-    paginator = Paginator(blogs, 1)
+    blogs = Blog.objects.all().order_by('-id')
+    paginator = Paginator(blogs, 5)
     page = request.GET.get("page")
     blogs = paginator.get_page(page)
     files = Brochures.objects.all()
@@ -142,7 +146,10 @@ def blog_detail(request,id):
     blog_data = Blog.objects.get(id=id)
     faqs = Faqs.objects.all()
     files = Brochures.objects.all()
-    blogs = Blog.objects.all()
+    blogs = Blog.objects.all().order_by('-id')
+    paginator = Paginator(blogs, 8)
+    page = request.GET.get("page")
+    blogs = paginator.get_page(page)
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
         context = {
@@ -246,8 +253,6 @@ def login(request):
                 context = {
                 }
         return render(request,'login.html',context)
-
-
     
 @login_required
 def dashboard(request):
@@ -263,14 +268,6 @@ def dashboard(request):
             'user_data':user_data
         }
     return render(request, 'dashboard.html',context)
-
-
-@login_required
-def logout(request):
-    django_logout(request)
-    messages.info(request, "Logged out successfully.")
-    return redirect("home")
-
 
 def apply_loan(request):
     if request.method == 'POST':
@@ -295,9 +292,13 @@ def apply_loan(request):
         saving_account_number = request.POST['saving_account_number']
         institution_address = request.POST['institution_address']
         phone_number = request.POST['phone_number']
+        
         photo = request.FILES['photo']
-        citi_front = request.FILES['citi_front']
-        citi_back = request.FILES['citi_back']
+        citizenship = request.FILES['citizenship']
+        if request.POST and request.POST['others']:
+            others = request.FILES['others']
+        else:
+            others=None
 
 
 
@@ -305,12 +306,11 @@ def apply_loan(request):
         initial = name + '@'+ dob
         username = initial.replace(" ", "_").lower()
         password = generate(size=10)
-
-
-         
-        if User.objects.filter(username = username).first():
+        if User.objects.filter(email = email).first():
             messages.error(request, "This email is already taken")
             return redirect('apply_loan')
+
+        
         first_name, last_name = name.split(" ", 1)
         user = User.objects.create_user(first_name = first_name, last_name=last_name, email=email, username=username, password=password)
         user.save()
@@ -324,16 +324,14 @@ def apply_loan(request):
         ]
         send_mail(subject, message, email_from, recipient_list)
         messages.error(request, "Your Login credentials are sent to your email address. " + email + " Please check your inbox. ")
-
         Borrower.objects.create(user=user, name=name, email=email, contact=phone_number, address=address)
 
         Loan.objects.create(user=user, desired_loan_amount = desired_loan_amount,annual_income = annual_income ,use_of_loan = use_of_loan ,name = name ,
         date_of_birth = date_of_birth,marital_status = marital_status ,email = email ,phone = phone ,
         how_long_have_you_lived_in_your_given_address = how_long_have_you_lived_in_your_given_address ,
         address = address ,present_employer_name = present_employer_name ,occupation = occupation ,years_of_experience = years_of_experience ,
-        gross_monthly_income = gross_monthly_income ,monthly_rent = monthly_rent,comments = comments ,
-        institution_name = institution_name ,saving_account_number = saving_account_number ,institution_address = institution_address ,phone_number = phone_number,
-        citi_front=citi_front, photo=photo, citi_back=citi_back)
+        gross_monthly_income = gross_monthly_income ,monthly_rent = monthly_rent, comments = comments ,
+        institution_name = institution_name ,saving_account_number = saving_account_number ,institution_address = institution_address ,phone_number = phone_number,citizenship=citizenship, photo=photo, others=others)
         return redirect('home')
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
@@ -345,7 +343,18 @@ def apply_loan(request):
         }
     return render(request, 'loan_form.html',context)
 
-
+@login_required
+def delete_loan(request,id):
+    obj = Loan.objects.get(id=id, user=request.user)
+    obj.delete()
+    return redirect('apply_loan')
+    
+    
+@login_required
+def logout(request):
+    django_logout(request)
+    messages.info(request, "Logged out successfully.")
+    return redirect("home")
 
 @login_required
 def company_profile(request):
@@ -361,7 +370,8 @@ def company_profile(request):
             'company_data':company_data
         }
     return render(request, 'company_profile.html',context)
-
+    
+    
 def shareholders(request):
     team = Shareholder.objects.all()
     if CompanySetup.objects.filter()[:1].exists():
@@ -375,7 +385,8 @@ def shareholders(request):
             'team':team,
         }
     return render(request,'shareholders.html',context)
-
+    
+    
 def chat(request):
     if request.method =='POST':
         message = request.POST["message"]
@@ -390,7 +401,6 @@ def chat(request):
                 'company':company,
                 'chat':chat,
                 'reply':reply,
-                
             }
         else:
             context = {
@@ -399,8 +409,8 @@ def chat(request):
                 
             }
         return render(request,'chat.html',context)
-
-
+        
+        
 def mail(request):
     if request.user.is_superuser:
         if request.method =='POST':
@@ -436,7 +446,6 @@ def bulk_mail(request):
             subject = request.POST["subject"]
             message = request.POST["message"]
             shareholders=Shareholder.objects.all()
-
             for shareholders in shareholders:
                 subject = f"{subject}"
                 message = f"{message}"
@@ -447,7 +456,6 @@ def bulk_mail(request):
                 ]
                 send_mail(subject, message, email_from, recipient_list)
                 SentMail.objects.create(email=email,subject=subject,message=message)
-
             return redirect("bulk_mail")
             
         if CompanySetup.objects.filter()[:1].exists():
@@ -462,35 +470,8 @@ def bulk_mail(request):
     else:
         return redirect('login')
 
-
-# def selected_mail(request):
-#     if request.user.is_superuser:
-#         if request.method =='POST':
-#             subject = request.POST["subject"]
-#             message = request.POST["message"]
-#             print(request.POST['selected'])
-#             selected = ''
-#             for request.POST['selected'] in selected:
-#                 print(selected)
-#             return redirect("selected_mail")
-#         else:
-#             if CompanySetup.objects.filter()[:1].exists():
-#                 shareholders=Shareholder.objects.all()
-#                 company = CompanySetup.objects.filter()[:1].get()
-#                 context = {
-#                     'company':company,
-#                     'shareholders':shareholders,
-#                 }
-#             else:
-#                 context = {
-#                     'shareholders':shareholders,
-#                 }
-#             return render(request,'selected_mail.html',context)
-#     else:
-#         return redirect('login')
-
-
-
+    
+    
 def selected_mail(request):
     if request.user.is_superuser:
         if request.method =='POST':
@@ -525,9 +506,6 @@ def selected_mail(request):
     else:
         return redirect('login')
 
-
-
-
 def page_not_found_view(request, exception):
     if CompanySetup.objects.filter()[:1].exists():
         company = CompanySetup.objects.filter()[:1].get()
@@ -540,8 +518,7 @@ def page_not_found_view(request, exception):
         'shareholders':shareholders,
         }
     return render(request, "error404.html", context)
-
-
+    
 @login_required
 def borrower_dashboard(request):
     loan_data = Loan.objects.filter(user=request.user)
@@ -557,5 +534,3 @@ def borrower_dashboard(request):
         'loan_data':loan_data,
         }
     return render(request, "borrower_dashboard.html", context)
-
-    

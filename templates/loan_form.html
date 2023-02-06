@@ -6,61 +6,9 @@
       <form action="{% url 'apply_loan' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
+        
         <fieldset>
-          <div id="div_id_annual_income" class="control-group required-field">
-            <label for="id_annual_income" class="control-label requiredField">
-              Annual income<span class="asteriskField">*</span>
-            </label>
-            <div class="controls">
-              <input
-                type="number"
-                name="annual_income"
-                class="form-input numberinput"
-                placeholder="100000"
-                required=""
-                id="id_annual_income"
-              />
-            </div>
-          </div>
-          <div
-            id="div_id_desired_loan_amount"
-            class="control-group required-field"
-          >
-            <label
-              for="id_desired_loan_amount"
-              class="control-label requiredField"
-            >
-              Desired loan amount<span class="asteriskField">*</span>
-            </label>
-            <div class="controls">
-              <input
-                type="number"
-                name="desired_loan_amount"
-                class="form-input numberinput"
-                placeholder="100000"
-                required=""
-                id="id_desired_loan_amount"
-              />
-            </div>
-          </div>
-          <div id="div_id_use_of_loan" class="control-group required-field">
-            <label for="id_use_of_loan" class="control-label requiredField">
-              Use of loan<span class="asteriskField">*</span>
-            </label>
-            <div class="controls">
-              <input
-                type="text"
-                name="use_of_loan"
-                class="form-input textinput textInput"
-                placeholder="business_purpose"
-                required=""
-                id="id_use_of_loan"
-              />
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>contact information</legend>
+          <legend>CONTACT INFORMATION</legend>
           <div id="div_id_name" class="control-group required-field">
             <label for="id_name" class="control-label requiredField">
               Name<span class="asteriskField">*</span>
@@ -85,7 +33,7 @@
                 type="text"
                 name="date_of_birth"
                 class="form-input textinput textInput"
-                placeholder="100000"
+                placeholder="2000-04-20"
                 required=""
                 id="id_date_of_birth"
               />
@@ -172,6 +120,60 @@
                 placeholder="2 Years"
                 required=""
                 id="id_how_long_have_you_lived_in_your_given_address"
+              />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+            <legend>LOAN INFORMATION</legend>
+          <div id="div_id_annual_income" class="control-group required-field">
+            <label for="id_annual_income" class="control-label requiredField">
+              Annual income<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="number"
+                name="annual_income"
+                class="form-input numberinput"
+                placeholder="100000"
+                required=""
+                id="id_annual_income"
+              />
+            </div>
+          </div>
+          <div
+            id="div_id_desired_loan_amount"
+            class="control-group required-field"
+          >
+            <label
+              for="id_desired_loan_amount"
+              class="control-label requiredField"
+            >
+              Desired loan amount<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="number"
+                name="desired_loan_amount"
+                class="form-input numberinput"
+                placeholder="100000"
+                required=""
+                id="id_desired_loan_amount"
+              />
+            </div>
+          </div>
+          <div id="div_id_use_of_loan" class="control-group required-field">
+            <label for="id_use_of_loan" class="control-label requiredField">
+              Use of loan<span class="asteriskField">*</span>
+            </label>
+            <div class="controls">
+              <input
+                type="text"
+                name="use_of_loan"
+                class="form-input textinput textInput"
+                placeholder="business_purpose"
+                required=""
+                id="id_use_of_loan"
               />
             </div>
           </div>
@@ -271,21 +273,21 @@
               />
             </div>
           </div>
-          {% comment %} <div id="div_id_down_payment" class="control-group required-field">
-            <label for="id_down_payment" class="control-label requiredField">
-              Down payment<span class="asteriskField">*</span>
-            </label>
-            <div class="controls">
-              <input
-                type="text"
-                name="down_payment"
-                class="form-input textinput textInput"
-                placeholder="50000"
-                required=""
-                id="id_down_payment"
-              />
-            </div>
-          </div> {% endcomment %}
+          <!--<div id="div_id_down_payment" class="control-group required-field">-->
+          <!--  <label for="id_down_payment" class="control-label requiredField">-->
+          <!--    Down payment<span class="asteriskField">*</span>-->
+          <!--  </label>-->
+          <!--  <div class="controls">-->
+          <!--    <input-->
+          <!--      type="text"-->
+          <!--      name="down_payment"-->
+          <!--      class="form-input textinput textInput"-->
+          <!--      placeholder="50000"-->
+          <!--      required=""-->
+          <!--      id="id_down_payment"-->
+          <!--    />-->
+          <!--  </div>-->
+          <!--</div>-->
           <div id="div_id_comments" class="control-group required-field">
             <label for="id_comments" class="control-label requiredField">
               Comments<span class="asteriskField">*</span>
@@ -303,7 +305,7 @@
           </div>
         </fieldset>
         <fieldset>
-          <legend>Bank References</legend>
+          <legend>BANK REFERENCES</legend>
           <div
             id="div_id_institution_name"
             class="control-group required-field"
@@ -383,9 +385,6 @@
             </div>
           </div>
         </fieldset>
-
-
-
         <fieldset>
           <legend>Documents</legend>
           <div
@@ -415,12 +414,12 @@
               for="id_institution_name"
               class="control-label requiredField"
             >
-              Citizenship Front<span class="asteriskField">*</span>
+              Citizenship <span class="asteriskField">*</span>
             </label>
             <div class="controls">
               <input
                 type="file"
-                name="citi_front"
+                name="citizenship"
                 required
               />
             </div>
@@ -433,13 +432,13 @@
               for="id_institution_name"
               class="control-label requiredField"
             >
-              Citizenship Back<span class="asteriskField">*</span>
+              Other Documents
             </label>
             <div class="controls">
               <input
                 type="file"
-                name="citi_back"
-                required
+                name="others"
+                
               />
             </div>
           </div>
@@ -468,7 +467,7 @@
     fieldset {
       margin-top: 20px;
     }
-    legend,label {
+    fieldset legend {
       color: black;
     }
     .help-block strong {

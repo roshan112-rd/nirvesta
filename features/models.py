@@ -218,8 +218,8 @@ class Loan(models.Model):
 
     
     photo = models.FileField(null=True, blank=True)
-    citi_front = models.FileField(null=True, blank=True)
-    citi_back = models.FileField(null=True, blank=True)
+    citizenship = models.FileField(null=True, blank=True)
+    others = models.FileField(null=True, blank=True)
 
 
     LOAN_STATUS = (("pending", "pending"), ("rejected", "rejected"), ("approved", "approved"))
